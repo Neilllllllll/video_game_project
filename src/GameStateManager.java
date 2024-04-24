@@ -23,7 +23,8 @@ public class GameStateManager extends StateBasedGame{
 
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		addState(new Interface());
-		addState(new PlayState());
+		//addState(new PlayState());
+		addState(new MonJeu());
 	}
 	
 }

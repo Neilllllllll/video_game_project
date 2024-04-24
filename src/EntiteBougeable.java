@@ -1,37 +1,242 @@
 import org.newdawn.slick.SlickException;
 
+//Classe abstraite représentant une entité pouvant se déplacer
 public abstract class EntiteBougeable extends EntiteAffichable{
+	
+	protected Force force_y[];
+	protected Force force_x[];
+	
+	protected float masse;
+	
+	private float deplacementx = 0;
+	private float deplacementy = 0;
+	
 	protected Vitesse vitesse;
+	protected Vitesse vitesselim;
 	protected Acceleration acceleration;
 	
-	public EntiteBougeable(Vitesse vitesse, Acceleration acceleration, String path, CarreHitbox carre, Position position) throws SlickException {
+	// Constructeur initialisant l'entité avec sa vitesse, accélération, et d'autres propriétés
+	public EntiteBougeable(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position) throws SlickException {
 		super(path, carre, position);
 		this.position = position;
 		this.vitesse = vitesse;
+		this.vitesselim = vitesselim;
+		this.acceleration = acceleration;
+		force_y = new Force[10];
+		force_x = new Force[10];
+	}
+	
+	
+	// Méthode pour ajouter une force horizontale à l'entité
+	public void ajouter_force_x(Force force) {
+		if(!force.isHorizontale()) {
+			System.out.println("On ne peut pas ajouter la force car elle est verticale");
+			return;
+		}
+		for(int i = 0; i < force_x.length; i++) {
+			if(force_x[i] == null) {
+				force_x[i] = force;
+				return;
+			}
+		}
+		System.out.println("Force non ajouté");
+	}
+	
+	// Méthode pour ajouter une force verticale à l'entité
+	public void ajouter_force_y(Force force) {
+		if(force.isHorizontale()) {
+			System.out.println("On ne peut pas ajouter la force car elle est horizontale");
+			return;
+		}
+		for(int i = 0; i < force_y.length; i++) {
+			if(force_y[i] == null) {
+				force_y[i] = force;
+				return;
+			}
+		}
+		System.out.println("Force non ajouté");
+	}
+	
+	// Méthode pour supprimer une force verticale
+	public void cancel_force_y(Force force) {
+		if(force.isHorizontale() == true) {
+			System.out.println("On ne peut pas retirer la force car elle est horizontale");
+			return;
+		}
+		for(int i = 0; i < force_y.length; i++) {
+			if(force_y[i] != null) {
+				if(force_y[i] == force) {
+					for(int j = i; j < force_y.length-1; j++) {
+						force_y[j] = force_y[j+1];
+						if(force_y[j+1] != null) {
+							return;
+						}
+					}
+				}
+				System.out.println("Pas de force trouvée");
+			}
+		}
+	}
+	
+	// Méthode pour supprimer une force horizontale
+	public void cancel_force_x(Force force) {
+		if(force.isHorizontale() == false) {
+			System.out.println("On ne peut pas retirer la force car elle est verticale");
+			return;
+		}
+		for(int i = 0; i < force_x.length; i++) {
+			if(force_x[i] != null) {
+				if(force_x[i] == force) {
+					for(int j = i; j < force_x.length-1; j++) {
+						force_x[j] = force_x[j+1];
+						if(force_x[j+1] == null) {
+							return;
+						}
+					}
+					System.out.println("ici");
+				}
+				System.out.println("Pas de force trouvée");
+			}
+		}
+	}
+	
+	// Méthode mettant à jour le mouvement de l'entité en fonction des forces appliquées
+	public void update_mouvement(int delta) {
+		float t = (float) delta/ (float) 1000;
+		
+		acceleration.setAy(bdf_y());
+		if(acceleration.getAy() != 0) {
+			deplacementy = (acceleration.getAy() * (float)Math.pow(t, 2))/2 + vitesse.getVy() * t;
+			position.setY(position.getY() + deplacementy);
+			if(vitesse.getVy() + acceleration.getAy()*t < vitesselim.getVy()) {
+				vitesse.setVy(vitesse.getVy() + acceleration.getAy() * t);
+			}
+		}
+		else {
+			deplacementy = 0;
+		}
+		
+		acceleration.setAx(bdf_x());
+		if(acceleration.getAx() != 0) {
+			deplacementx = (acceleration.getAx() * (float)Math.pow(t, 2))/2 + vitesse.getVx() * t;
+			position.setX(position.getX() + deplacementx);
+			if(Math.abs(vitesse.getVx() + acceleration.getAx()*t) < vitesselim.getVx()) {
+				vitesse.setVx(vitesse.getVx() + acceleration.getAx() * t);
+			}
+		}
+		else {
+			deplacementx = 0;
+		}
+	}
+	
+	// Calcul de l'accélération verticale basée sur les forces appliquées
+	public float bdf_y() {
+		float sum = 0;
+		for(int i = 0; i < force_y.length; i++) {
+			if(force_y[i] != null) {
+				sum += force_y[i].getNorme();
+			}
+			else {
+				break;
+			}
+		}
+		return sum/masse;
+	}
+	
+	// Calcul de l'accélération horizontale basée sur les forces appliquées
+	public float bdf_x() {
+		float sum = 0;
+		for(int i = 0; i < force_x.length; i++) {
+			if(force_x[i] != null) {
+				sum += force_x[i].getNorme();
+			}
+			else {
+				break;
+			}
+		}
+		return sum/masse;
+	}
+
+
+	public Force[] getForce_y() {
+		return force_y;
+	}
+
+
+	public void setForce_y(Force[] force_y) {
+		this.force_y = force_y;
+	}
+
+
+	public Force[] getForce_x() {
+		return force_x;
+	}
+
+
+	public void setForce_x(Force[] force_x) {
+		this.force_x = force_x;
+	}
+
+
+	public float getMasse() {
+		return masse;
+	}
+
+
+	public void setMasse(float masse) {
+		this.masse = masse;
+	}
+
+
+	public float getDeplacementX() {
+		return deplacementx;
+	}
+
+
+	public void setDeplacementX(float deplacement) {
+		this.deplacementx = deplacement;
+	}
+	
+	public float getDeplacementY() {
+		return deplacementy;
+	}
+
+
+	public void setDeplacementY(float deplacement) {
+		this.deplacementy = deplacement;
+	}
+
+	public Vitesse getVitesse() {
+		return vitesse;
+	}
+
+
+	public void setVitesse(Vitesse vitesse) {
+		this.vitesse = vitesse;
+	}
+
+
+	public Vitesse getVitesselim() {
+		return vitesselim;
+	}
+
+
+	public void setVitesselim(Vitesse vitesselim) {
+		this.vitesselim = vitesselim;
+	}
+
+
+	public Acceleration getAcceleration() {
+		return acceleration;
+	}
+
+
+	public void setAcceleration(Acceleration acceleration) {
 		this.acceleration = acceleration;
 	}
 	
-	public void droite(float delta) {
-        position.setX(position.getX() + (acceleration.getAx() * (delta/1000) * (delta/1000) + vitesse.getVx() * delta/1000));
-        vitesse.setVx(vitesse.getVx() + acceleration.getAx()*delta/1000);
-    }
-
-	public void gauche(float delta) {
-        position.setX(position.getX() - (acceleration.getAx() * (delta/1000) * (delta/1000) + vitesse.getVx() * (delta/1000)));
-        vitesse.setVx(vitesse.getVx() + acceleration.getAx()*delta/1000);
-    }
 	
-	public void stopX() {
-        vitesse.setVx(0);
-    }
 	
-	public void stopY() {
-        vitesse.setVy(0);
-    }
 	
-	 public void bas(float delta) {
-	        position.setY(position.getY() + (acceleration.getAy() * (delta/1000) * (delta/1000) + vitesse.getVy() * (delta/1000)));
-	        vitesse.setVy(vitesse.getVy() + acceleration.getAy() * delta/1000);
-	    }
 	
 }

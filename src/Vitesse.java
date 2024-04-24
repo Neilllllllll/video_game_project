@@ -7,7 +7,7 @@ public class Vitesse {
 		vx = 0;
 		vy = 0;
 	}
-	
+
 	public Vitesse(float vx, float vy) {
 		this.vx = vx;
 		this.vy = vy;
@@ -27,6 +27,14 @@ public class Vitesse {
 
 	public void setVy(float vy) {
 		this.vy = vy;
+	}
+	
+	public boolean vxpluspetite(Vitesse v) {
+		return vx < v.getVx();
+	}
+	
+	public boolean vypluspetite(Vitesse v) {
+		return vy < v.getVy();
 	}
 	
 }

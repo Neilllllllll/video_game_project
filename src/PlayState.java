@@ -15,7 +15,7 @@ public class PlayState extends BasicGameState {
 	}
 	
 	public void render (GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
-		g.setColor(Color.white);
+		g.setColor(Color.red);
 		g.fillRect(0, 0, 1920, 1080);
 	}
 	

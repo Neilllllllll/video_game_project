@@ -1,0 +1,52 @@
+import org.newdawn.slick.Graphics;
+
+public class Force {
+	
+	float norme;
+	boolean positif, horizontale;
+	
+	public float getNorme() {
+		return norme;
+	}
+
+	public void setNorme(float norme) {
+		this.norme = norme;
+	}
+
+	public boolean isPositif() {
+		return positif;
+	}
+
+	public void setPositif(boolean positif) {
+		this.positif = positif;
+	}
+
+	public boolean isHorizontale() {
+		return horizontale;
+	}
+
+	public void setHorizontale(boolean horizontale) {
+		this.horizontale = horizontale;
+	}
+
+	public Force(float norme, boolean positif, boolean horizontale) {
+		if(positif == true) {
+			this.norme = norme;
+		}
+		else {
+			this.norme = norme * -1;
+		}
+		this.positif = positif;
+		this.horizontale = horizontale;
+	}
+	
+	public Force() {
+		norme = 0;
+		positif = true;
+		horizontale = true;
+	}
+	
+	public String toString() {
+		return "norme : " + norme + " horizontale : " + horizontale + " positif : " + positif;
+	}
+}

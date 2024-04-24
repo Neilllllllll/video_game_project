@@ -1,3 +1,5 @@
+import org.newdawn.slick.Graphics;
+
 public class CarreHitbox{
 	
 	protected Position position;
@@ -8,6 +10,10 @@ public class CarreHitbox{
 		this.position = position;
 		this.width = width;
 		this.heigth = heigth;
+	}
+	
+	public void afficher(Graphics g) {
+		g.drawRect(position.getX(), position.getY(), width, heigth);
 	}
 	
 	public float getWidth() {

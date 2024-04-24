@@ -14,5 +14,31 @@ public abstract class EntiteAffichable {
 	public void afficher() {
 		images.draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	public CarreHitbox getCarre() {
+		return carre;
+	}
+
+	public void setCarre(CarreHitbox carre) {
+		this.carre = carre;
+	}
+
+	public Image getImages() {
+		return images;
+	}
+
+	public void setImages(Image images) {
+		this.images = images;
+	}
+
+	
 	
 }
