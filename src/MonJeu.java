@@ -17,7 +17,7 @@ public class MonJeu extends BasicGameState {
 	Vitesse vitesse_pers = new Vitesse();
 	Vitesse vitesse_lim_pers = new Vitesse(300, 700);
 	Acceleration acceleration_pers = new Acceleration(0, 0);
-	String path_pers = "wizar/Chara - BlueIdle00000.png/";
+	String path_pers = "wizar_d/Chara - BlueIdle00000.png/";
 	Position position_pers = new Position(1000/2, 1000/2);
 	CarreHitbox carre_pers = new CarreHitbox(position_pers, 100, 170);
 	CarreHitbox zone = new CarreHitbox(new Position(), 500, 500);

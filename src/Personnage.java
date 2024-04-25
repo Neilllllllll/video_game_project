@@ -14,6 +14,7 @@ public class Personnage extends EntiteBougeable{
 	// Zone où le personnage considère les plateformes
 	private CarreHitbox zone;
 	
+	// Généraliser le constructeur
 	public Personnage(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position, float hauteur_saut, CarreHitbox zone) throws SlickException {
 		super(vitesse, vitesselim, acceleration, path, carre, position);
 		// Masse  
@@ -34,17 +35,30 @@ public class Personnage extends EntiteBougeable{
 		// Hauteur du saut que peut faire le personnage
 		this.hauteur_saut = hauteur_saut;
 		
-		// Images lorsqu'il est statique
-		images_animation = new Image[19];
-		String path_s;
-		for(int i = 0; i < images_animation.length; i++) {
+		// Images lorsqu'il est statique vers la droite
+		images_animation_d = new Image[19];
+		String path_s_d;
+		for(int i = 0; i < images_animation_d.length; i++) {
 			if(i < 10) {
-				path_s = "wizar/Chara - BlueIdle0000" + i + ".png/";
+				path_s_d = "wizar_d/Chara - BlueIdle0000" + i + ".png/";
 			}
 			else {
-				path_s = "wizar/Chara - BlueIdle000" + i + ".png/";
+				path_s_d = "wizar_d/Chara - BlueIdle000" + i + ".png/";
 			}
-			images_animation[i] = new Image(path_s);
+			images_animation_d[i] = new Image(path_s_d);
+		}
+		
+		// Images lorsqu'il est statique vers la droite
+		images_animation_g = new Image[19];
+		String path_s_g;
+		for(int i = 0; i < images_animation_g.length; i++) {
+			if(i < 10) {
+				path_s_g = "wizar_g/Chara - BlueIdle0000" + i + ".png/";
+			}
+			else {
+				path_s_g = "wizar_g/Chara - BlueIdle000" + i + ".png/";
+			}
+			images_animation_g[i] = new Image(path_s_g);
 		}
 		
 		// Images lorsqu'il va à droite
@@ -74,17 +88,24 @@ public class Personnage extends EntiteBougeable{
 		}
 		
 		// Images lorsqu'il jump
-		images_animation_jump = new Image[7];
-		String path_j;
-		for(int i = 0; i < images_animation_jump.length; i++) {
-			path_j = "wizar_jump/CharaWizardJump_0000" + i + ".png/";
-			images_animation_jump[i] = new Image(path_j);
+		images_animation_jump_d = new Image[7];
+		String path_j_d;
+		for(int i = 0; i < images_animation_jump_d.length; i++) {
+			path_j_d = "wizar_jump_d/CharaWizardJump_0000" + i + ".png/";
+			images_animation_jump_d[i] = new Image(path_j_d);
+		}
+		
+		// Images lorsqu'il jump
+		images_animation_jump_g = new Image[7];
+		String path_j_g;
+		for(int i = 0; i < images_animation_jump_g.length; i++) {
+			path_j_g = "wizar_jump_g/CharaWizardJump_0000" + i + ".png/";
+			images_animation_jump_g[i] = new Image(path_j_g);
 		}
 	}
 	
 	public void saut() {
 		if(nb_saut < 0) {
-			System.out.println("Limite de saut atteint");
 			return;
 		}
 		ajouter_force_y(force_saut);

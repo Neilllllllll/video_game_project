@@ -17,7 +17,7 @@ public class Map extends EntiteAffichable{
 	}
 	
 	public void afficher_map() {
-		super.afficher_entite_affichable();
+		super.afficher_entite_affichable(false);
 		personnage.afficher_entite_bougeable();
 		for(int i = 0; i < obstacles.length; i++) {
 			obstacles[i].afficher_entite_bougeable();

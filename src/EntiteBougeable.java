@@ -21,13 +21,16 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	protected static int d = 0;
 	protected Image[] images_animation_gauche;
 	protected static int g = 0;
-	protected Image[] images_animation_jump;
-	protected static int j = 0;
+	protected Image[] images_animation_jump_d;
+	protected static int j_d = 0;
+	protected Image[] images_animation_jump_g;
+	protected static int j_g = 0;
 	
 	// Etats 
 	protected boolean droite = false;
 	protected boolean gauche = false;
 	protected boolean saute = false;
+	protected static boolean direction_droite;
 	
 	// Force qui peut s'exercer sur l'entite
 	protected Force force_saut;
@@ -48,7 +51,24 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	
 	// Method pour afficher
 	public void afficher_entite_bougeable() {
-		if(droite == true) {
+		if(saute == true) {
+			if(direction_droite == true) {
+				images_animation_jump_d[j_d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				j_d++;
+				if(j_d == images_animation_jump_d.length-1) {
+					j_d = 0;
+				}
+			}
+			else {
+				images_animation_jump_g[j_g].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				j_g++;
+				if(j_g == images_animation_jump_g.length-1) {
+					j_g = 0;
+				}
+			}
+		}
+		else if(droite == true) {
+			direction_droite = true;
 			images_animation_droite[d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 			d++;
 			if(d == images_animation_droite.length-1) {
@@ -56,21 +76,15 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 			}
 		}
 		else if (gauche == true) {
+			direction_droite = false;
 			images_animation_gauche[g].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 			g++;
 			if(g == images_animation_gauche.length-1) {
 				g = 0;
 			}
 		}
-		else if(saute == true) {
-			images_animation_jump[j].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
-			j++;
-			if(j == images_animation_jump.length-1) {
-				j = 0;
-			}
-		}
 		else {
-			super.afficher_entite_affichable();
+			super.afficher_entite_affichable(direction_droite);
 		}
 	}
 	
