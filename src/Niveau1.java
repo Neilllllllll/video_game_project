@@ -1,3 +1,4 @@
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -45,6 +46,8 @@ public class Niveau1 extends BasicGameState {
 	private Map map;
 	private CarreHitbox carre_map = new CarreHitbox(new Position(0, 0), 10000, 10000);
 	
+	boolean cond = true;
+	
 	public void init(GameContainer arg0, StateBasedGame game) throws SlickException {
 		personnage = new Personnage(vitesse_pers, vitesse_lim_pers,acceleration_pers, path_pers, carre_pers, position_pers, 25, zone);
 		obstacle = new Obstacle(vitesse, vitesse_lim_obst, acceleration, path, carre, position_obst);
@@ -61,9 +64,6 @@ public class Niveau1 extends BasicGameState {
 	}
 	
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
-		
-		// Sauvegardez l'état du contexte graphique
-		g.pushTransform();
 
 	    // Appliquez la translation pour simuler le déplacement de la caméra
 	    g.translate(camera.getPosition().getX(), camera.getPosition().getY());
@@ -77,9 +77,9 @@ public class Niveau1 extends BasicGameState {
 			map.getObstacles()[i].carre.afficher(g);
 		}
 		personnage.getZone().afficher(g);
-	    
-	    g.popTransform();
-	    // Afficher les éléments que l'on ne veut pas déplacer après la method g.popTransform(); (par exemple la barre de vie du personnage)
+		g.translate(-camera.getPosition().getX(), -camera.getPosition().getY());
+		
+		g.drawRect(0, 0, 100, 100);
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {

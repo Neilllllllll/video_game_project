@@ -51,7 +51,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	
 	// Method pour afficher
 	public void afficher_entite_bougeable() {
-		if(saute == true) {
+		/*(saute == true) {
 			if(direction_droite == true) {
 				images_animation_jump_d[j_d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 				j_d++;
@@ -66,8 +66,8 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 					j_g = 0;
 				}
 			}
-		}
-		else if(droite == true) {
+		}*/
+		if(droite == true) {
 			direction_droite = true;
 			images_animation_droite[d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 			d++;

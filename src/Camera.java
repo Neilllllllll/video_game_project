@@ -1,4 +1,5 @@
 
+
 public class Camera {
 	    // Déclaration des variables pour la position de la caméra, sa taille, et les limites de la carte.
 	    private Position position;
