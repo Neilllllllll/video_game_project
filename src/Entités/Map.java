@@ -1,4 +1,9 @@
+package Entités;
 import org.newdawn.slick.SlickException;
+
+import Hitbox.CarreHitbox;
+import Mécanique.Position;
+
 import java.util.ArrayList;
 
 

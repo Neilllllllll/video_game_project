@@ -1,6 +1,13 @@
+package Entités;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
+import Hitbox.CarreHitbox;
+import Mécanique.Acceleration;
+import Mécanique.Force;
+import Mécanique.Position;
+import Mécanique.Vitesse;
 
 public class Personnage extends EntiteBougeable{
 	

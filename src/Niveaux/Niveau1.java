@@ -1,3 +1,4 @@
+package Niveaux;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -5,6 +6,15 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import Entités.Camera;
+import Entités.Map;
+import Entités.Obstacle;
+import Entités.Personnage;
+import Hitbox.CarreHitbox;
+import Mécanique.Acceleration;
+import Mécanique.Position;
+import Mécanique.Vitesse;
 
 public class Niveau1 extends BasicGameState {
 	
@@ -16,7 +26,7 @@ public class Niveau1 extends BasicGameState {
 	private Vitesse vitesse_pers = new Vitesse();
 	private Vitesse vitesse_lim_pers = new Vitesse(300, 700);
 	private Acceleration acceleration_pers = new Acceleration(0, 0);
-	private String path_pers = "wizar_d/Chara - BlueIdle00000.png/";
+	private String path_pers = "wizar_d/wizar_droite0.png/";
 	private Position position_pers = new Position(1000/2, 1000/2);
 	private CarreHitbox carre_pers = new CarreHitbox(position_pers, 100, 170);
 	private CarreHitbox zone = new CarreHitbox(new Position(), 500, 500);

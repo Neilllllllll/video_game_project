@@ -1,4 +1,10 @@
+package Entités;
 import org.newdawn.slick.SlickException;
+
+import Hitbox.CarreHitbox;
+import Mécanique.Acceleration;
+import Mécanique.Position;
+import Mécanique.Vitesse;
 
 public class Obstacle extends EntiteBougeable{
 	

@@ -1,3 +1,4 @@
+package Mécanique;
 
 public class Vitesse {
 

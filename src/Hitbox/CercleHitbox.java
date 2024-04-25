@@ -1,4 +1,7 @@
+package Hitbox;
 import org.newdawn.slick.Graphics;
+
+import Mécanique.Position;
 
 public class CercleHitbox {
 	

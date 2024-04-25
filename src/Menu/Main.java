@@ -1,3 +1,5 @@
+package Menu;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 

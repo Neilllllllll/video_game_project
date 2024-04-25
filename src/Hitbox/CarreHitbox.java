@@ -1,4 +1,8 @@
+package Hitbox;
 import org.newdawn.slick.Graphics;
+
+import Entités.EntiteAffichable;
+import Mécanique.Position;
 
 public class CarreHitbox{
 	
@@ -17,8 +21,8 @@ public class CarreHitbox{
 	}
 	
 	public void update_position(float offsetx, float offsety, EntiteAffichable entite) {
-		position.setX(entite.position.getX() + offsetx);
-		position.setY(entite.position.getY() + offsety);
+		position.setX(entite.getPosition().getX() + offsetx);
+		position.setY(entite.getPosition().getY() + offsety);
 	}
 	
 	public static boolean sechevauche(CarreHitbox r1, CarreHitbox r2) {

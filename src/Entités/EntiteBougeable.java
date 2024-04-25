@@ -1,5 +1,12 @@
+package Entités;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
+import Hitbox.CarreHitbox;
+import Mécanique.Acceleration;
+import Mécanique.Force;
+import Mécanique.Position;
+import Mécanique.Vitesse;
 
 //Classe abstraite représentant une entité pouvant se déplacer
 public abstract class EntiteBougeable extends EntiteAffichable{

@@ -1,5 +1,9 @@
+package Entités;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
+import Hitbox.CarreHitbox;
+import Mécanique.Position;
 
 public abstract class EntiteAffichable {
 	protected Position position;
