@@ -2,8 +2,8 @@ import org.newdawn.slick.Graphics;
 
 public class CercleHitbox {
 	
-	protected Position position;
-	protected float r;
+	private Position position;
+	private float r;
 	
 	public CercleHitbox(Position position, float r) {
 		this.position = position;
@@ -16,8 +16,8 @@ public class CercleHitbox {
 	
 	public boolean iscollision(CarreHitbox carre) {
         // Trouver le point le plus proche sur le rectangle au centre du cercle
-        float closestX = Math.max(carre.position.getX(), Math.min(position.getX() + 500, carre.position.getX() + carre.getWidth()));
-        float closestY = Math.max(carre.position.getY(), Math.min(position.getY() + 500, carre.position.getY() + carre.getHeigth()));
+        float closestX = Math.max(carre.getPosition().getX(), Math.min(position.getX() + 500, carre.getPosition().getX() + carre.getWidth()));
+        float closestY = Math.max(carre.getPosition().getY(), Math.min(position.getY() + 500, carre.getPosition().getY() + carre.getHeigth()));
 
         // Calculer la distance entre le centre du cercle et ce point
         float distanceX = Math.abs(position.getX() - closestX);

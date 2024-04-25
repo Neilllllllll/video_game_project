@@ -1,9 +1,25 @@
-import org.newdawn.slick.Graphics;
 
 public class Force {
 	
 	private float norme;
 	private boolean positif, horizontale;
+	
+	public Force() {
+		norme = 0;
+		positif = true;
+		horizontale = true;
+	}
+	
+	public Force(float norme, boolean positif, boolean horizontale) {
+		if(positif == true) {
+			this.norme = norme;
+		}
+		else {
+			this.norme = norme * -1;
+		}
+		this.positif = positif;
+		this.horizontale = horizontale;
+	}
 	
 	public float getNorme() {
 		return norme;
@@ -27,23 +43,6 @@ public class Force {
 
 	public void setHorizontale(boolean horizontale) {
 		this.horizontale = horizontale;
-	}
-
-	public Force(float norme, boolean positif, boolean horizontale) {
-		if(positif == true) {
-			this.norme = norme;
-		}
-		else {
-			this.norme = norme * -1;
-		}
-		this.positif = positif;
-		this.horizontale = horizontale;
-	}
-	
-	public Force() {
-		norme = 0;
-		positif = true;
-		horizontale = true;
 	}
 	
 	public String toString() {

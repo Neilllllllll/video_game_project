@@ -8,12 +8,10 @@ public class Map extends EntiteAffichable{
 	private Obstacle[] obstacles = new Obstacle[40];
 	private ArrayList<Obstacle> list_obstacles = new ArrayList<Obstacle>();
 
-
 	public Map(Personnage personnage, String path, CarreHitbox carre, Obstacle[] obstacles) throws SlickException {
 		super(path, carre, new Position(0,0));
 		this.personnage = personnage;
-		this.obstacles = obstacles;
-		
+		this.obstacles = obstacles;	
 	}
 	
 	public void afficher_map() {
@@ -56,6 +54,5 @@ public class Map extends EntiteAffichable{
 	public void setObstacles(Obstacle[] obstacles) {
 		this.obstacles = obstacles;
 	}
-	
-	
+		
 }

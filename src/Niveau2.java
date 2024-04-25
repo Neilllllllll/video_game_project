@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class PlayState extends BasicGameState {
+public class Niveau2 extends BasicGameState {
 	
 	Input input;
 
@@ -29,7 +29,7 @@ public class PlayState extends BasicGameState {
 	}
 
 	public int getID() {
-		return 1;
+		return 2;
 	}
 
 }

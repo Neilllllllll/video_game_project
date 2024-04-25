@@ -1,5 +1,3 @@
-
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -7,45 +5,45 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MonJeu extends BasicGameState {
+public class Niveau1 extends BasicGameState {
 	
 	Input input;
 	
 	private Camera camera;
 	
 	private Personnage personnage;
-	Vitesse vitesse_pers = new Vitesse();
-	Vitesse vitesse_lim_pers = new Vitesse(300, 700);
-	Acceleration acceleration_pers = new Acceleration(0, 0);
-	String path_pers = "wizar_d/Chara - BlueIdle00000.png/";
-	Position position_pers = new Position(1000/2, 1000/2);
-	CarreHitbox carre_pers = new CarreHitbox(position_pers, 100, 170);
-	CarreHitbox zone = new CarreHitbox(new Position(), 500, 500);
+	private Vitesse vitesse_pers = new Vitesse();
+	private Vitesse vitesse_lim_pers = new Vitesse(300, 700);
+	private Acceleration acceleration_pers = new Acceleration(0, 0);
+	private String path_pers = "wizar_d/Chara - BlueIdle00000.png/";
+	private Position position_pers = new Position(1000/2, 1000/2);
+	private CarreHitbox carre_pers = new CarreHitbox(position_pers, 100, 170);
+	private CarreHitbox zone = new CarreHitbox(new Position(), 500, 500);
 	
 	private Obstacle obstacle;
-	Vitesse vitesse = new Vitesse();
-	Vitesse vitesse_lim_obst = new Vitesse(300, 300);
-	Acceleration acceleration = new Acceleration();
-	String path = "Square/carré_rouge.png/";
-	Position position_obst = new Position(-500, 800);
-	CarreHitbox carre = new CarreHitbox(position_obst, 10000, 30);
+	private Vitesse vitesse = new Vitesse();
+	private Vitesse vitesse_lim_obst = new Vitesse(300, 300);
+	private Acceleration acceleration = new Acceleration();
+	private String path = "Square/carré_rouge.png/";
+	private Position position_obst = new Position(-500, 800);
+	private CarreHitbox carre = new CarreHitbox(position_obst, 10000, 30);
 	
 	private Obstacle obstacle1;
-	Vitesse vitesse1 = new Vitesse();
-	Vitesse vitesse_lim_obst1 = new Vitesse(300, 300);
-	Acceleration acceleration1 = new Acceleration();
-	String path1 = "Square/carré_violet.png/";
-	Position position_obst1 = new Position(0, 600);
-	CarreHitbox carre1 = new CarreHitbox(position_obst1, 500, 30);
+	private Vitesse vitesse1 = new Vitesse();
+	private Vitesse vitesse_lim_obst1 = new Vitesse(300, 300);
+	private Acceleration acceleration1 = new Acceleration();
+	private String path1 = "Square/carré_violet.png/";
+	private Position position_obst1 = new Position(0, 600);
+	private CarreHitbox carre1 = new CarreHitbox(position_obst1, 500, 30);
 	
 	private Obstacle obstacle2;
-	Position position_obst2 = new Position(1920, 600);
-	CarreHitbox carre2 = new CarreHitbox(position_obst2, 500, 30);
+	private Position position_obst2 = new Position(1920, 600);
+	private CarreHitbox carre2 = new CarreHitbox(position_obst2, 500, 30);
 	
 	private Obstacle[] obstacles = new Obstacle[3];
 	
 	private Map map;
-	CarreHitbox carre_map = new CarreHitbox(new Position(0, 0), 10000, 10000);
+	private CarreHitbox carre_map = new CarreHitbox(new Position(0, 0), 10000, 10000);
 	
 	public void init(GameContainer arg0, StateBasedGame game) throws SlickException {
 		personnage = new Personnage(vitesse_pers, vitesse_lim_pers,acceleration_pers, path_pers, carre_pers, position_pers, 25, zone);
@@ -82,7 +80,7 @@ public class MonJeu extends BasicGameState {
 	    
 	    g.popTransform();
 	    // Afficher les éléments que l'on ne veut pas déplacer après la method g.popTransform(); (par exemple la barre de vie du personnage)
-	    }
+	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		// update la position de la caméra en fonction de la position du personnage
@@ -96,10 +94,8 @@ public class MonJeu extends BasicGameState {
 		personnage.check_input(input);
 
 	}
-
-	@Override
+	
 	public int getID() {
-		// TODO Auto-generated method stub
 		return 1;
 	}
 

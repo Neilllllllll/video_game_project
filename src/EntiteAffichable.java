@@ -1,5 +1,6 @@
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
 public abstract class EntiteAffichable {
 	protected Position position;
 	protected CarreHitbox carre;
@@ -60,7 +61,4 @@ public abstract class EntiteAffichable {
 	public void setImages(Image images) {
 		this.images = images;
 	}
-
-	
-	
 }

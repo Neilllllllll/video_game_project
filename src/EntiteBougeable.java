@@ -86,8 +86,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		else {
 			super.afficher_entite_affichable(direction_droite);
 		}
-	}
-	
+	}	
 	
 	// Méthode pour ajouter une force horizontale à l'entité
 	public void ajouter_force_x(Force force) {
@@ -220,41 +219,33 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		return sum/masse;
 	}
 
-
 	public Force[] getForce_y() {
 		return force_y;
 	}
-
 
 	public void setForce_y(Force[] force_y) {
 		this.force_y = force_y;
 	}
 
-
 	public Force[] getForce_x() {
 		return force_x;
 	}
-
 
 	public void setForce_x(Force[] force_x) {
 		this.force_x = force_x;
 	}
 
-
 	public float getMasse() {
 		return masse;
 	}
-
 
 	public void setMasse(float masse) {
 		this.masse = masse;
 	}
 
-
 	public float getDeplacementX() {
 		return deplacementx;
 	}
-
 
 	public void setDeplacementX(float deplacement) {
 		this.deplacementx = deplacement;
@@ -264,7 +255,6 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		return deplacementy;
 	}
 
-
 	public void setDeplacementY(float deplacement) {
 		this.deplacementy = deplacement;
 	}
@@ -273,33 +263,23 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		return vitesse;
 	}
 
-
 	public void setVitesse(Vitesse vitesse) {
 		this.vitesse = vitesse;
 	}
-
 
 	public Vitesse getVitesselim() {
 		return vitesselim;
 	}
 
-
 	public void setVitesselim(Vitesse vitesselim) {
 		this.vitesselim = vitesselim;
 	}
-
 
 	public Acceleration getAcceleration() {
 		return acceleration;
 	}
 
-
 	public void setAcceleration(Acceleration acceleration) {
 		this.acceleration = acceleration;
 	}
-	
-	
-	
-	
-	
 }

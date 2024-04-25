@@ -2,9 +2,9 @@ import org.newdawn.slick.Graphics;
 
 public class CarreHitbox{
 	
-	protected Position position;
-	protected float width;
-	protected float heigth;
+	private Position position;
+	private float width;
+	private float heigth;
 	
 	public CarreHitbox(Position position, float width, float heigth) {
 		this.position = position;

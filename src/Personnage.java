@@ -5,10 +5,10 @@ import org.newdawn.slick.SlickException;
 public class Personnage extends EntiteBougeable{
 	
 	// Coordonnée du saut
-	float cord_h_saut;
+	private float cord_h_saut;
 	
 	// Hauteur du saut;
-	float hauteur_saut;
+	private float hauteur_saut;
 	private int nb_saut;
 	
 	// Zone où le personnage considère les plateformes
@@ -271,7 +271,4 @@ public class Personnage extends EntiteBougeable{
 	public void setZone(CarreHitbox zone) {
 		this.zone = zone;
 	}
-	
-	
-	
 }
