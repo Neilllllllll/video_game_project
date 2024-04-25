@@ -2,8 +2,8 @@ import org.newdawn.slick.Graphics;
 
 public class Force {
 	
-	float norme;
-	boolean positif, horizontale;
+	private float norme;
+	private boolean positif, horizontale;
 	
 	public float getNorme() {
 		return norme;

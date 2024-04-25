@@ -49,7 +49,6 @@ public class Obstacle extends EntiteBougeable{
 		}
 		else if(position_personnage == 2 && personnage.position.getY() < position.getY() + carre.getHeigth()) {
 			personnage.position.setY(position.getY() + carre.getHeigth());
-			
 			personnage.cancel_force_y(personnage.getForce_saut());
 			personnage.vitesse.setVy(0);
 		}
@@ -60,6 +59,10 @@ public class Obstacle extends EntiteBougeable{
 	
 	public void afficher_pos() {
 		System.out.println(position_personnage);
+	}
+	
+	public String toString() {
+		return "Ici";
 	}
 }
 

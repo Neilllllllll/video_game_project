@@ -102,9 +102,10 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	
 	// Méthode mettant à jour le mouvement de l'entité en fonction des forces appliquées
 	public void update_mouvement(int delta) {
+		
 		float t = (float) delta/ (float) 1000;
 		
-		acceleration.setAy(bdf_y());
+		acceleration.setAy(pfd_y());
 		if(acceleration.getAy() != 0) {
 			deplacementy = (acceleration.getAy() * (float)Math.pow(t, 2))/2 + vitesse.getVy() * t;
 			position.setY(position.getY() + deplacementy);
@@ -116,7 +117,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 			deplacementy = 0;
 		}
 		
-		acceleration.setAx(bdf_x());
+		acceleration.setAx(pfd_x());
 		if(acceleration.getAx() != 0) {
 			deplacementx = (acceleration.getAx() * (float)Math.pow(t, 2))/2 + vitesse.getVx() * t;
 			position.setX(position.getX() + deplacementx);
@@ -130,7 +131,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	}
 	
 	// Calcul de l'accélération verticale basée sur les forces appliquées
-	public float bdf_y() {
+	public float pfd_y() {
 		float sum = 0;
 		for(int i = 0; i < force_y.length; i++) {
 			if(force_y[i] != null) {
@@ -144,7 +145,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	}
 	
 	// Calcul de l'accélération horizontale basée sur les forces appliquées
-	public float bdf_x() {
+	public float pfd_x() {
 		float sum = 0;
 		for(int i = 0; i < force_x.length; i++) {
 			if(force_x[i] != null) {

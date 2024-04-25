@@ -16,6 +16,27 @@ public class CarreHitbox{
 		g.drawRect(position.getX(), position.getY(), width, heigth);
 	}
 	
+	public void update_position(float offsetx, float offsety, EntiteAffichable entite) {
+		position.setX(entite.position.getX() + offsetx);
+		position.setY(entite.position.getY() + offsety);
+	}
+	
+	public static boolean sechevauche(CarreHitbox r1, CarreHitbox r2) {
+		 // Vérifier si un rectangle est à côté de l'autre
+		if (r1.position.getX() + r1.getWidth() < r2.position.getX() || r2.position.getX() + r2.getWidth() < r1.position.getX()) {
+			System.out.println("non");
+	        return false;
+	    }
+	    // Vérifier si un rectangle est au-dessus de l'autre
+	    if (r1.position.getY() + r1.getHeigth() < r2.position.getY() || r2.position.getY() + r2.getHeigth() < r1.position.getY()) {
+	    	System.out.println("non");
+	        return false;
+	    }
+	    // Si aucune des conditions ci-dessus n'est vraie, les rectangles se chevauchent
+	    System.out.println("oui");
+	    return true;
+	}
+	
 	public float getWidth() {
 		return width;
 	}

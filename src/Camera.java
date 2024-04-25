@@ -3,14 +3,12 @@ public class Camera {
 	    // Déclaration des variables pour la position de la caméra, sa taille, et les limites de la carte.
 	    private Position position;
 	    private CarreHitbox carre;
-	    private Map map;
 	    
 
 	    // Constructeur de la caméra.
-	    public Camera(Position position, CarreHitbox carre, Map map) {
+	    public Camera(Position position, CarreHitbox carre) {
 	    	this.position = position;
 	    	this.carre = carre;
-	    	this.map = map;
 	    }
 	    
 	    public void update_pos_cam(Personnage personnage) {
@@ -45,14 +43,4 @@ public class Camera {
 		public void setCarre(CarreHitbox carre) {
 			this.carre = carre;
 		}
-
-		public Map getMap() {
-			return map;
-		}
-
-		public void setMap(Map map) {
-			this.map = map;
-		}
-	    
-	    
 }

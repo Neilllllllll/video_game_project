@@ -1,3 +1,4 @@
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Personnage extends EntiteBougeable{
@@ -21,13 +22,12 @@ public class Personnage extends EntiteBougeable{
 	private Force force_gauche;
 	
 	// Zone où le personnage considère les plateformes
-	private CercleHitbox cercle;
+	private CarreHitbox zone;
 	
-	public Personnage(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position, float hauteur_saut) throws SlickException {
+	public Personnage(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position, float hauteur_saut, CarreHitbox zone) throws SlickException {
 		super(vitesse, vitesselim, acceleration, path, carre, position);
 		masse = 50;
-		Position centre_pers = new Position(carre.position.getX() + (carre.getWidth()/2), carre.position.getY() + (carre.getHeigth()/2));
-		cercle = new CercleHitbox(centre_pers, 22);
+		this.zone = zone;
 		force_saut = new Force(1000000, false, false);
 		force_poids = new Force(100000, true, false);
 		this.force_droite = new Force(10000, true, true);;
@@ -98,6 +98,40 @@ public class Personnage extends EntiteBougeable{
 			gauche = false;
 		}
 	}
+	
+	public void check_input(Input input) {
+		if(input.isKeyDown(Input.KEY_RIGHT)){
+			droite();
+		}
+		else if (isDroite() && input.isKeyDown(Input.KEY_RIGHT) == false){
+			ralentis_droite();
+		}
+		
+		if(input.isKeyDown(Input.KEY_LEFT)){
+			gauche();
+		}
+		else if(isGauche() && input.isKeyDown(Input.KEY_LEFT) == false){
+			ralentis_gauche();
+		}
+		
+		if(isDroite() == false && isGauche() == false) {
+			vitesse.setVx(0);
+		}
+		
+		if(input.isKeyPressed(Input.KEY_SPACE)){
+			saut();
+		}
+		if(isSaute()) {
+			check_hauteur();
+		}
+	}
+	
+	public boolean considere_obs(Obstacle obstacle) {
+		if(CarreHitbox.sechevauche(zone, obstacle.carre)) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean isDroite() {
 		return droite;
@@ -147,14 +181,6 @@ public class Personnage extends EntiteBougeable{
 		this.force_gauche = force_gauche;
 	}
 
-	public CercleHitbox getCercle() {
-		return cercle;
-	}
-
-	public void setCercle(CercleHitbox cercle) {
-		this.cercle = cercle;
-	}
-
 	public boolean isSaute() {
 		return saute;
 	}
@@ -170,4 +196,15 @@ public class Personnage extends EntiteBougeable{
 	public void setNb_saut(int nb_saut) {
 		this.nb_saut = nb_saut;
 	}
+
+	public CarreHitbox getZone() {
+		return zone;
+	}
+
+	public void setZone(CarreHitbox zone) {
+		this.zone = zone;
+	}
+	
+	
+	
 }
