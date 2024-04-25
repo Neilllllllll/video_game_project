@@ -4,15 +4,27 @@ public abstract class EntiteAffichable {
 	protected Position position;
 	protected CarreHitbox carre;
 	protected Image images;
+	protected Image[] images_animation;
+	protected static int i = 0;
 	
 	public EntiteAffichable(String path, CarreHitbox carre, Position position) throws SlickException {
 		images = new Image(path);
 		this.position = position;
 		this.carre = carre;
+		images_animation = new Image[1];
 	}
 	
-	public void afficher() {
-		images.draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+	public void afficher_entite_affichable() {
+		if(images_animation[0] == null) {
+			images.draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+		}
+		else {
+			images_animation[i].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			i++;
+			if(i == images_animation.length-1) {
+				i = 0;
+			}
+		}
 	}
 
 	public Position getPosition() {

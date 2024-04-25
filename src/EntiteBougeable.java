@@ -1,3 +1,4 @@
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 //Classe abstraite représentant une entité pouvant se déplacer
@@ -15,6 +16,25 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	protected Vitesse vitesselim;
 	protected Acceleration acceleration;
 	
+	// Tableau des images par seconde du perso
+	protected Image[] images_animation_droite;
+	protected static int d = 0;
+	protected Image[] images_animation_gauche;
+	protected static int g = 0;
+	protected Image[] images_animation_jump;
+	protected static int j = 0;
+	
+	// Etats 
+	protected boolean droite = false;
+	protected boolean gauche = false;
+	protected boolean saute = false;
+	
+	// Force qui peut s'exercer sur l'entite
+	protected Force force_saut;
+	protected Force force_poids;
+	protected Force force_droite;
+	protected Force force_gauche;
+	
 	// Constructeur initialisant l'entité avec sa vitesse, accélération, et d'autres propriétés
 	public EntiteBougeable(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position) throws SlickException {
 		super(path, carre, position);
@@ -24,6 +44,34 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		this.acceleration = acceleration;
 		force_y = new Force[10];
 		force_x = new Force[10];
+	}
+	
+	// Method pour afficher
+	public void afficher_entite_bougeable() {
+		if(droite == true) {
+			images_animation_droite[d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			d++;
+			if(d == images_animation_droite.length-1) {
+				d = 0;
+			}
+		}
+		else if (gauche == true) {
+			images_animation_gauche[g].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			g++;
+			if(g == images_animation_gauche.length-1) {
+				g = 0;
+			}
+		}
+		else if(saute == true) {
+			images_animation_jump[j].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			j++;
+			if(j == images_animation_jump.length-1) {
+				j = 0;
+			}
+		}
+		else {
+			super.afficher_entite_affichable();
+		}
 	}
 	
 	

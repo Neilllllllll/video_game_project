@@ -1,12 +1,8 @@
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 public class Personnage extends EntiteBougeable{
-	
-	// Etats 
-	private boolean droite = false;
-	private boolean gauche = false;
-	private boolean saute = false;
 	
 	// Coordonnée du saut
 	float cord_h_saut;
@@ -15,25 +11,75 @@ public class Personnage extends EntiteBougeable{
 	float hauteur_saut;
 	private int nb_saut;
 	
-	// Force du personnage
-	private Force force_saut;
-	private Force force_poids;
-	private Force force_droite;
-	private Force force_gauche;
-	
 	// Zone où le personnage considère les plateformes
 	private CarreHitbox zone;
 	
 	public Personnage(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position, float hauteur_saut, CarreHitbox zone) throws SlickException {
 		super(vitesse, vitesselim, acceleration, path, carre, position);
+		// Masse  
 		masse = 50;
+		
+		// Hitbox pour détecter les plateformes 
 		this.zone = zone;
+		
+		// Initialisation des forces du personnage - faut le mettre en paramètre car cela va varier en fonction du personnage
 		force_saut = new Force(1000000, false, false);
 		force_poids = new Force(100000, true, false);
 		this.force_droite = new Force(10000, true, true);;
 		this.force_gauche = new Force(10000, false, true);
+		
+		// Force mise par défaut
 		this.ajouter_force_y(force_poids);
+		
+		// Hauteur du saut que peut faire le personnage
 		this.hauteur_saut = hauteur_saut;
+		
+		// Images lorsqu'il est statique
+		images_animation = new Image[19];
+		String path_s;
+		for(int i = 0; i < images_animation.length; i++) {
+			if(i < 10) {
+				path_s = "wizar/Chara - BlueIdle0000" + i + ".png/";
+			}
+			else {
+				path_s = "wizar/Chara - BlueIdle000" + i + ".png/";
+			}
+			images_animation[i] = new Image(path_s);
+		}
+		
+		// Images lorsqu'il va à droite
+		images_animation_droite = new Image[19];
+		String path_d;
+		for(int i = 0; i < images_animation_droite.length; i++) {
+			if(i < 10) {
+				path_d = "wizar_droite/Chara_BlueWalk0000" + i + ".png/";
+			}
+			else {
+				path_d = "wizar_droite/Chara_BlueWalk000" + i + ".png/";
+			}
+			images_animation_droite[i] = new Image(path_d);
+		}
+		
+		// Images lorsqu'il va à droite
+		images_animation_gauche = new Image[19];
+		String path_g;
+		for(int i = 0; i < images_animation_gauche.length; i++) {
+			if(i < 10) {
+				path_g = "wizar_gauche/Chara_BlueWalk0000" + i + ".png/";
+			}
+			else {
+				path_g = "wizar_gauche/Chara_BlueWalk000" + i + ".png/";
+			}
+			images_animation_gauche[i] = new Image(path_g);
+		}
+		
+		// Images lorsqu'il jump
+		images_animation_jump = new Image[7];
+		String path_j;
+		for(int i = 0; i < images_animation_jump.length; i++) {
+			path_j = "wizar_jump/CharaWizardJump_0000" + i + ".png/";
+			images_animation_jump[i] = new Image(path_j);
+		}
 	}
 	
 	public void saut() {
