@@ -46,25 +46,15 @@ public class Personnage extends EntiteBougeable{
 		images_animation_d = new Image[19];
 		String path_s_d;
 		for(int i = 0; i < images_animation_d.length; i++) {
-			if(i < 10) {
-				path_s_d = "wizar_d/Chara - BlueIdle0000" + i + ".png/";
-			}
-			else {
-				path_s_d = "wizar_d/Chara - BlueIdle000" + i + ".png/";
-			}
+			path_s_d = "wizar_d/wizar_droite" + i + ".png";
 			images_animation_d[i] = new Image(path_s_d);
 		}
 		
-		// Images lorsqu'il est statique vers la droite
+		// Images lorsqu'il est statique vers la gauche
 		images_animation_g = new Image[19];
 		String path_s_g;
 		for(int i = 0; i < images_animation_g.length; i++) {
-			if(i < 10) {
-				path_s_g = "wizar_g/Chara - BlueIdle0000" + i + ".png/";
-			}
-			else {
-				path_s_g = "wizar_g/Chara - BlueIdle000" + i + ".png/";
-			}
+			path_s_g = "wizar_g/wizar_gauche" + i + ".png";
 			images_animation_g[i] = new Image(path_s_g);
 		}
 		
@@ -72,41 +62,31 @@ public class Personnage extends EntiteBougeable{
 		images_animation_droite = new Image[19];
 		String path_d;
 		for(int i = 0; i < images_animation_droite.length; i++) {
-			if(i < 10) {
-				path_d = "wizar_droite/Chara_BlueWalk0000" + i + ".png/";
-			}
-			else {
-				path_d = "wizar_droite/Chara_BlueWalk000" + i + ".png/";
-			}
+			path_d = "wizar_droite/wizar_walk_droite" + i + ".png";
 			images_animation_droite[i] = new Image(path_d);
 		}
 		
-		// Images lorsqu'il va à droite
+		// Images lorsqu'il va à gauche
 		images_animation_gauche = new Image[19];
 		String path_g;
 		for(int i = 0; i < images_animation_gauche.length; i++) {
-			if(i < 10) {
-				path_g = "wizar_gauche/Chara_BlueWalk0000" + i + ".png/";
-			}
-			else {
-				path_g = "wizar_gauche/Chara_BlueWalk000" + i + ".png/";
-			}
+			path_g = "wizar_gauche/wizar_walk_gauche" + i + ".png";
 			images_animation_gauche[i] = new Image(path_g);
 		}
 		
 		// Images lorsqu'il jump
-		images_animation_jump_d = new Image[7];
+		images_animation_jump_d = new Image[8];
 		String path_j_d;
 		for(int i = 0; i < images_animation_jump_d.length; i++) {
-			path_j_d = "wizar_jump_d/CharaWizardJump_0000" + i + ".png/";
+			path_j_d = "wizar_jump_d/wizar_jump_droite" + i + ".png";
 			images_animation_jump_d[i] = new Image(path_j_d);
 		}
 		
 		// Images lorsqu'il jump
-		images_animation_jump_g = new Image[7];
+		images_animation_jump_g = new Image[8];
 		String path_j_g;
 		for(int i = 0; i < images_animation_jump_g.length; i++) {
-			path_j_g = "wizar_jump_g/CharaWizardJump_0000" + i + ".png/";
+			path_j_g = "wizar_jump_g/wizar_jump_gauche" + i + ".png";
 			images_animation_jump_g[i] = new Image(path_j_g);
 		}
 	}
@@ -117,15 +97,16 @@ public class Personnage extends EntiteBougeable{
 		}
 		ajouter_force_y(force_saut);
 		saute = true;
+		est_sol = false;
+		System.out.println(false);
 		nb_saut--;
 		cord_h_saut = position.getY() + carre.getHeigth() - hauteur_saut;
 	}
 	
 	public void check_hauteur() {
 		if(position.getY() + carre.getHeigth() <= cord_h_saut) {
-			saute = false;
 			cancel_force_y(force_saut);
-			System.out.println("hauteur atteinte ");
+			saute = false;
 		}
 	}	
 	
@@ -176,6 +157,7 @@ public class Personnage extends EntiteBougeable{
 	public void check_input(Input input) {
 		if(input.isKeyDown(Input.KEY_RIGHT)){
 			droite();
+			direction_droite = true;
 		}
 		else if (isDroite() && input.isKeyDown(Input.KEY_RIGHT) == false){
 			ralentis_droite();
@@ -183,6 +165,7 @@ public class Personnage extends EntiteBougeable{
 		
 		if(input.isKeyDown(Input.KEY_LEFT)){
 			gauche();
+			direction_droite = false;
 		}
 		else if(isGauche() && input.isKeyDown(Input.KEY_LEFT) == false){
 			ralentis_gauche();
@@ -191,7 +174,6 @@ public class Personnage extends EntiteBougeable{
 		if(isDroite() == false && isGauche() == false) {
 			vitesse.setVx(0);
 		}
-		
 		if(input.isKeyPressed(Input.KEY_SPACE)){
 			saut();
 		}
@@ -278,4 +260,21 @@ public class Personnage extends EntiteBougeable{
 	public void setZone(CarreHitbox zone) {
 		this.zone = zone;
 	}
+
+	public float getCord_h_saut() {
+		return cord_h_saut;
+	}
+
+	public void setCord_h_saut(float cord_h_saut) {
+		this.cord_h_saut = cord_h_saut;
+	}
+
+	public float getHauteur_saut() {
+		return hauteur_saut;
+	}
+
+	public void setHauteur_saut(float hauteur_saut) {
+		this.hauteur_saut = hauteur_saut;
+	}
+	
 }

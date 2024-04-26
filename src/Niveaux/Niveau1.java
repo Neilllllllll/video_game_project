@@ -82,9 +82,9 @@ public class Niveau1 extends BasicGameState {
 	    map.afficher_map();
 	    
 	    // Affichage des Hitbox
-		map.getPersonnage().carre.afficher(g);
+		map.getPersonnage().getCarre().afficher(g);
 		for(int i = 0; i < obstacles.length; i++) {
-			map.getObstacles()[i].carre.afficher(g);
+			map.getObstacles()[i].getCarre().afficher(g);
 		}
 		personnage.getZone().afficher(g);
 		g.translate(-camera.getPosition().getX(), -camera.getPosition().getY());

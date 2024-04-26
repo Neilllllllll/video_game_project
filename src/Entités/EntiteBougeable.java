@@ -37,6 +37,7 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	protected boolean droite = false;
 	protected boolean gauche = false;
 	protected boolean saute = false;
+	protected boolean est_sol;
 	protected static boolean direction_droite;
 	
 	// Force qui peut s'exercer sur l'entite
@@ -54,11 +55,12 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 		this.acceleration = acceleration;
 		force_y = new Force[10];
 		force_x = new Force[10];
+		est_sol = true;
 	}
 	
 	// Method pour afficher
 	public void afficher_entite_bougeable() {
-		/*(saute == true) {
+		if (saute == true) {
 			if(direction_droite == true) {
 				images_animation_jump_d[j_d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
 				j_d++;
@@ -73,25 +75,36 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 					j_g = 0;
 				}
 			}
-		}*/
-		if(droite == true) {
-			direction_droite = true;
-			images_animation_droite[d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
-			d++;
-			if(d == images_animation_droite.length-1) {
-				d = 0;
-			}
-		}
-		else if (gauche == true) {
-			direction_droite = false;
-			images_animation_gauche[g].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
-			g++;
-			if(g == images_animation_gauche.length-1) {
-				g = 0;
-			}
 		}
 		else {
-			super.afficher_entite_affichable(direction_droite);
+			if(est_sol == false) {
+				if(direction_droite == true) {
+					images_animation_jump_d[images_animation_jump_d.length-1].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				}
+				else {
+					images_animation_jump_g[images_animation_jump_d.length-1].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				}
+			}
+			
+			else if(droite == true) {
+				direction_droite = true;
+				images_animation_droite[d].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				d++;
+				if(d == images_animation_droite.length-1) {
+					d = 0;
+				}
+			}
+			else if (gauche == true) {
+				direction_droite = false;
+				images_animation_gauche[g].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+				g++;
+				if(g == images_animation_gauche.length-1) {
+					g = 0;
+				}
+			}
+			else {
+				super.afficher_entite_affichable(direction_droite);
+			}
 		}
 	}	
 	
@@ -288,5 +301,158 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 
 	public void setAcceleration(Acceleration acceleration) {
 		this.acceleration = acceleration;
+	}
+
+	public float getDeplacementx() {
+		return deplacementx;
+	}
+
+	public void setDeplacementx(float deplacementx) {
+		this.deplacementx = deplacementx;
+	}
+
+	public float getDeplacementy() {
+		return deplacementy;
+	}
+
+	public void setDeplacementy(float deplacementy) {
+		this.deplacementy = deplacementy;
+	}
+
+	public Image[] getImages_animation_droite() {
+		return images_animation_droite;
+	}
+
+	public void setImages_animation_droite(Image[] images_animation_droite) {
+		this.images_animation_droite = images_animation_droite;
+	}
+
+	public static int getD() {
+		return d;
+	}
+
+	public static void setD(int d) {
+		EntiteBougeable.d = d;
+	}
+
+	public Image[] getImages_animation_gauche() {
+		return images_animation_gauche;
+	}
+
+	public void setImages_animation_gauche(Image[] images_animation_gauche) {
+		this.images_animation_gauche = images_animation_gauche;
+	}
+
+	public static int getG() {
+		return g;
+	}
+
+	public static void setG(int g) {
+		EntiteBougeable.g = g;
+	}
+
+	public Image[] getImages_animation_jump_d() {
+		return images_animation_jump_d;
+	}
+
+	public void setImages_animation_jump_d(Image[] images_animation_jump_d) {
+		this.images_animation_jump_d = images_animation_jump_d;
+	}
+
+	public static int getJ_d() {
+		return j_d;
+	}
+
+	public static void setJ_d(int j_d) {
+		EntiteBougeable.j_d = j_d;
+	}
+
+	public Image[] getImages_animation_jump_g() {
+		return images_animation_jump_g;
+	}
+
+	public void setImages_animation_jump_g(Image[] images_animation_jump_g) {
+		this.images_animation_jump_g = images_animation_jump_g;
+	}
+
+	public static int getJ_g() {
+		return j_g;
+	}
+
+	public static void setJ_g(int j_g) {
+		EntiteBougeable.j_g = j_g;
+	}
+
+	public boolean isDroite() {
+		return droite;
+	}
+
+	public void setDroite(boolean droite) {
+		this.droite = droite;
+	}
+
+	public boolean isGauche() {
+		return gauche;
+	}
+
+	public void setGauche(boolean gauche) {
+		this.gauche = gauche;
+	}
+
+	public boolean isSaute() {
+		return saute;
+	}
+
+	public void setSaute(boolean saute) {
+		this.saute = saute;
+	}
+	
+	
+	public boolean isEst_sol() {
+		return est_sol;
+	}
+
+	public void setEst_sol(boolean est_sol) {
+		this.est_sol = est_sol;
+	}
+
+	public static boolean isDirection_droite() {
+		return direction_droite;
+	}
+
+	public static void setDirection_droite(boolean direction_droite) {
+		EntiteBougeable.direction_droite = direction_droite;
+	}
+
+	public Force getForce_saut() {
+		return force_saut;
+	}
+
+	public void setForce_saut(Force force_saut) {
+		this.force_saut = force_saut;
+	}
+
+	public Force getForce_poids() {
+		return force_poids;
+	}
+
+	public void setForce_poids(Force force_poids) {
+		this.force_poids = force_poids;
+	}
+
+	public Force getForce_droite() {
+		return force_droite;
+	}
+
+	public void setForce_droite(Force force_droite) {
+		this.force_droite = force_droite;
+	}
+
+	public Force getForce_gauche() {
+		return force_gauche;
+	}
+
+	public void setForce_gauche(Force force_gauche) {
+		this.force_gauche = force_gauche;
 	}
 }
