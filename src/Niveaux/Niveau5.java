@@ -24,6 +24,7 @@ public class Niveau5 extends BasicGameState {
 	private Camera camera;
 	
 	private Xp xp;
+	private CarreHitbox zone_xp;
 	private CarreHitbox carre_xp;
 	private Position position_xp;
 	
@@ -88,12 +89,13 @@ public class Niveau5 extends BasicGameState {
 		
 		position_xp = new Position(100, 500);
 		carre_xp = new CarreHitbox(position_xp, 50, 50);
-		xp = new Xp("image_xp", carre_xp, position_xp);
+		zone_xp = new CarreHitbox(new Position(90, 450), 100, 100);
+		xp = new Xp("image_xp", carre_xp, position_xp, zone_xp);
 		
 		map = new Map(joueur, "fond_niv_5", carre_map, obstacles, xp);
 		
-		// camera = new Camera(new Position(0, 0), new CarreHitbox(new Position(0, 0), arg0.getScreenWidth(), arg0.getScreenWidth()));
-		camera = new Camera(new Position(0, 0), new CarreHitbox(new Position(0, 0), 1000, 1000));
+		//camera = new Camera(new Position(0, 0), new CarreHitbox(new Position(0, 0), arg0.getScreenWidth(), arg0.getScreenWidth()));
+		camera = new Camera(new Position(0, 0), new CarreHitbox(new Position(0, 0), 1920, 1080));
 	}
 	
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
@@ -110,8 +112,8 @@ public class Niveau5 extends BasicGameState {
 			map.getObstacles()[i].getCarre().afficher(g);
 		}
 		joueur.getZone().afficher(g);
+		zone_xp.afficher(g);
 		g.translate(-camera.getPosition().getX(), -camera.getPosition().getY());
-		
 		g.drawRect(0, 0, 100, 100);
 	}
 

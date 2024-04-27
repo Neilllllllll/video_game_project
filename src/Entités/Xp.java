@@ -1,34 +1,39 @@
 package Entités;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import Hitbox.CarreHitbox;
 import Mécanique.Position;
+import java.util.Random;
+
 
 public class Xp extends EntiteAffichable{
 	// Etat 
 	private boolean statique;
-	
 	private float h;
 	private float teta;
-	
+	private CarreHitbox zone; 
 	private String path_explosion;
 	
 	public Xp(
 			String images_animation_g_path, 
 			CarreHitbox carre, 
-			Position position) 
+			Position position,
+			CarreHitbox zone
+			)
 			throws SlickException {
 		
 		super(images_animation_g_path,
 				carre, 
 				position
 		);
+		this.zone = zone;
 		statique = true;
 		path_explosion = "explosion_niveau_5";
 	}
 	
-	public void update_xp(Joueur joueur) throws SlickException {
+	public void update_xp(Joueur joueur, int delta) throws SlickException {
 		if(statique == true) {
-			stationnaire();
+			stationnaire(delta);
 		}
 		else {
 			go_joueur(joueur);
@@ -72,9 +77,25 @@ public class Xp extends EntiteAffichable{
 	}
 
 	
-	public void stationnaire() {
-		super.afficher_entite_affichable(false);
-	}
+
+	public void stationnaire(int delta) {
+        if (statique) {
+            Random rand = new Random();
+            float vx = rand.nextFloat();
+            float vy = rand.nextFloat();
+            position.setX(position.getX() + (10 * delta/100));
+            position.setY(position.getY() + (10 * delta/100));
+            if (position.getX() < zone.getPosition().getX() || position.getX() + carre.getWidth() > zone.getPosition().getX() + zone.getWidth()) {
+                vx *= -1;
+            }
+            if (position.getY() < zone.getPosition().getY() || position.getY() + carre.getHeigth() > zone.getPosition().getY() + zone.getHeigth()) {
+                vy *= -1;
+            }
+        }
+    }
+
+
+
 	
 	public void atteint_joueur(Joueur joueur) throws SlickException {
 		images_animation_g = Animation.fill_Animation(path_explosion);
