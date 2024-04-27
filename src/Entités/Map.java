@@ -40,9 +40,7 @@ public class Map extends EntiteAffichable{
 					xp.setStatique(false);
 				}
 				xp.update_xp(joueur);
-				if(!xp.isStatique()) {
-					xp.go_joueur(joueur);
-				}
+
 				for(int i = 0; i < obstacles.length; i++) {
 					if(joueur.considere_obs(obstacles[i])) {
 						list_obstacles.add(obstacles[i]);

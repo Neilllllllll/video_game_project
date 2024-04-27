@@ -7,8 +7,6 @@ public class Xp extends EntiteAffichable{
 	// Etat 
 	private boolean statique;
 	
-	private float dx;
-	private float dy;
 	private float h;
 	private float teta;
 	
@@ -28,39 +26,51 @@ public class Xp extends EntiteAffichable{
 		path_explosion = "explosion_niveau_5";
 	}
 	
-	public void update_xp(Joueur joueur) {
+	public void update_xp(Joueur joueur) throws SlickException {
 		if(statique == true) {
 			stationnaire();
+		}
+		else {
+			go_joueur(joueur);
 		}
 	}
 	
 	public void calcul_intiale(Joueur joueur) {
-		dx = joueur.position.getX() - position.getX();
-		dy = joueur.position.getY() - position.getY();
-		h = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-		teta = (float) Math.acos(Math.sqrt(Math.pow(dx, 2)) / h);
+	    if (statique) {
+	        float dx = (position.getX() + carre.getWidth() / 2) - (joueur.position.getX() + joueur.carre.getWidth() / 2);
+	        float dy = (position.getY() + carre.getHeigth() / 2) - (joueur.position.getY() + joueur.carre.getHeigth() / 2);
+
+	        h = (float) Math.sqrt(dx * dx + dy * dy);  // Calcul de la distance initiale
+
+	        // Calcul de l'angle initial en utilisant atan2 pour gérer correctement tous les quadrants
+	        teta = (float) Math.atan2(dy, dx);
+	    }
 	}
+
 	
 	public void go_joueur(Joueur joueur) throws SlickException {
-		float offset = 5;
-		
-		float centre_xp_x = position.getX() + carre.getWidth()/2;
-		float centre_xp_y = position.getY() + carre.getHeigth()/2;
-		
-		float centre_joueur_x = joueur.position.getX() + joueur.getZone().getWidth()/2;
-		float centre_joueur_y =	joueur.position.getY() + joueur.getZone().getHeigth()/2;
-		
-		if(!(centre_xp_x < centre_joueur_x + offset && centre_xp_x > centre_joueur_x - offset && centre_xp_y > centre_joueur_y - offset && centre_xp_y < centre_joueur_y + offset)) {
-			teta += 0.01;
-			h -= 0.6;
-			position.setX((float)(h*Math.cos(teta)) + centre_joueur_x - carre.getWidth()/2);
-			position.setY((float)(h*Math.sin(teta)) + centre_joueur_y - carre.getWidth()/2);
-		}
-		else {
-			atteint_joueur(joueur);
-		}
-		
+	    float offset = 5;
+	    
+	    float centre_xp_x = position.getX() + carre.getWidth() / 2;
+	    float centre_xp_y = position.getY() + carre.getHeigth() / 2;
+	    
+	    float centre_joueur_x = joueur.position.getX() + joueur.carre.getWidth() / 2;
+	    float centre_joueur_y = joueur.position.getY() + joueur.carre.getHeigth() / 2;
+	    
+	    // Vérification si l'objet est assez proche du joueur pour considérer qu'il l'a "atteint"
+	    if (Math.abs(centre_xp_x - centre_joueur_x) <= offset && Math.abs(centre_xp_y - centre_joueur_y) <= offset) {
+	        atteint_joueur(joueur);
+	    } else {
+	        // Mise à jour de l'angle et de la distance pour le mouvement en spirale
+	        teta -= 0.1; // Décrémente l'angle pour la rotation
+	        h -= 2; // Réduit la distance pour créer l'effet spirale
+	        
+	        // Mise à jour de la position basée sur l'angle et la distance modifiés
+	        position.setX((float) (h * Math.cos(teta)) + centre_joueur_x - carre.getWidth() / 2);
+	        position.setY((float) (h * Math.sin(teta)) + centre_joueur_y - carre.getHeigth() / 2);
+	    }
 	}
+
 	
 	public void stationnaire() {
 		super.afficher_entite_affichable(false);
@@ -76,22 +86,6 @@ public class Xp extends EntiteAffichable{
 
 	public void setStatique(boolean statique) {
 		this.statique = statique;
-	}
-
-	public float getDx() {
-		return dx;
-	}
-
-	public void setDx(float dx) {
-		this.dx = dx;
-	}
-
-	public float getDy() {
-		return dy;
-	}
-
-	public void setDy(float dy) {
-		this.dy = dy;
 	}
 
 	public float getH() {

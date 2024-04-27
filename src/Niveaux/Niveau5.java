@@ -87,7 +87,7 @@ public class Niveau5 extends BasicGameState {
 		obstacles[2] = obstacle2;
 		
 		position_xp = new Position(100, 500);
-		carre_xp = new CarreHitbox(position_xp, 100, 100);
+		carre_xp = new CarreHitbox(position_xp, 50, 50);
 		xp = new Xp("image_xp", carre_xp, position_xp);
 		
 		map = new Map(joueur, "fond_niv_5", carre_map, obstacles, xp);
