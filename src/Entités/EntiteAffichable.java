@@ -8,37 +8,51 @@ import Mécanique.Position;
 public abstract class EntiteAffichable {
 	protected Position position;
 	protected CarreHitbox carre;
-	protected Image images;
 	protected Image[] images_animation_d;
 	protected Image[] images_animation_g;
-	protected static int i = 0;
-	protected static int z = 0;
+	protected int i = 0;
+	protected int z = 0;
 	
-	public EntiteAffichable(String path, CarreHitbox carre, Position position) throws SlickException {
-		images = new Image(path);
+	public EntiteAffichable(String images_animation_g_path, CarreHitbox carre, Position position) throws SlickException {
+		z = 0;
 		this.position = position;
 		this.carre = carre;
-		images_animation_d = new Image[1];
-		images_animation_g = new Image[1];
+		this.images_animation_g = Animation.fill_Animation(images_animation_g_path);
+		images_animation_d = new Image[1];	
+		}
+	
+	public EntiteAffichable(CarreHitbox carre, String images_animation_d_path, Position position) throws SlickException {
+		i = 0;
+		this.position = position;
+		this.carre = carre;
+		this.images_animation_g = Animation.fill_Animation(images_animation_d_path);
+		this.images_animation_g = new Image[1];	
+	}
+	
+	public EntiteAffichable(String images_animation_d_path, String images_animation_g_path, CarreHitbox carre, Position position) throws SlickException {
+		i = 0;
+		z = 0;
+		this.position = position;
+		this.carre = carre;
+		this.images_animation_g = Animation.fill_Animation(images_animation_g_path);
+		this.images_animation_d = Animation.fill_Animation(images_animation_d_path);
+
 	}
 	
 	public void afficher_entite_affichable(boolean direction_droite) {
 		if(images_animation_d[0] != null && direction_droite == true) {
-			images_animation_d[i].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
-			i++;
-			if(i == images_animation_d.length-1) {
+			if(i == images_animation_d.length) {
 				i = 0;
 			}
+			images_animation_d[i].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			i++;
 		}
-		else if(images_animation_g[0] != null && direction_droite == false) {
-			images_animation_g[z].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
-			z++;
-			if(z == images_animation_g.length-1) {
+		else if (images_animation_g[0] != null && direction_droite == false) {
+			if(z == images_animation_g.length) {
 				z = 0;
 			}
-		}
-		else {
-			images.draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			images_animation_g[z].draw(position.getX(), position.getY(), carre.getWidth(), carre.getHeigth());
+			z++;
 		}
 	}
 
@@ -56,13 +70,5 @@ public abstract class EntiteAffichable {
 
 	public void setCarre(CarreHitbox carre) {
 		this.carre = carre;
-	}
-
-	public Image getImages() {
-		return images;
-	}
-
-	public void setImages(Image images) {
-		this.images = images;
 	}
 }

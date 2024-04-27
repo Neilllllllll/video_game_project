@@ -47,15 +47,47 @@ public abstract class EntiteBougeable extends EntiteAffichable{
 	protected Force force_gauche;
 	
 	// Constructeur initialisant l'entité avec sa vitesse, accélération, et d'autres propriétés
-	public EntiteBougeable(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position) throws SlickException {
-		super(path, carre, position);
+	public EntiteBougeable(
+			Vitesse vitesse, 
+			Vitesse vitesselim, 
+			Acceleration acceleration, 
+			String images_animation_g_path, 
+			String images_animation_d_path,
+			String images_animation_droite,
+			String images_animation_gauche,
+			String images_animation_jump_d,
+			String images_animation_jump_g,
+			CarreHitbox carre, 
+			Position position
+	) throws SlickException {
+		super(
+				images_animation_g_path,
+				images_animation_d_path,
+				carre, 
+				position
+		);
+		
 		this.position = position;
 		this.vitesse = vitesse;
 		this.vitesselim = vitesselim;
 		this.acceleration = acceleration;
+		
 		force_y = new Force[10];
 		force_x = new Force[10];
 		est_sol = true;
+		
+		// Images lorsqu'il va à gauche
+		this.images_animation_gauche = Animation.fill_Animation(images_animation_gauche);
+		
+		// Images lorsqu'il va à droite
+		this.images_animation_droite = Animation.fill_Animation(images_animation_droite);
+		
+		// Images lorsqu'il jump
+		this.images_animation_jump_d = Animation.fill_Animation(images_animation_jump_d);
+		
+		// Images lorsqu'il jump
+		this.images_animation_jump_g = Animation.fill_Animation(images_animation_jump_g);
+		
 	}
 	
 	// Method pour afficher

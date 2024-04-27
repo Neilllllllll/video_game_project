@@ -15,17 +15,8 @@ public class Camera {
 	    }
 	    
 	    public void update_pos_cam(Personnage personnage) {
-	    	if(personnage.vitesse.getVx() > 0) {
-	    		 position.setX(position.getX() - Math.abs(personnage.getDeplacementX()));
-	    	}else if (personnage.vitesse.getVx() < 0){
-	    		position.setX(position.getX() + Math.abs(personnage.getDeplacementX()));
-	    	}
-	    	
-	    	if(personnage.vitesse.getVy() > 0) {
-	    		 position.setY(position.getY() - Math.abs(personnage.getDeplacementY()));
-	    	}else if (personnage.vitesse.getVy() < 0){
-	    		position.setY(position.getY() + Math.abs(personnage.getDeplacementY()));
-	    	}
+	    	position.setX(-(personnage.position.getX() + (personnage.carre.getWidth()/2) - carre.getWidth()/2));
+	    	position.setY(-(personnage.position.getY() + (personnage.carre.getHeigth()/2) - carre.getHeigth()/2));
 	    }
 	    
 		public Position getPosition() {

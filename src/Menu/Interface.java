@@ -19,7 +19,7 @@ public class Interface extends BasicGameState {
 	private int L = 120;
 	
 	public void init (GameContainer arg0, StateBasedGame game) throws SlickException {
-		fond = new Image("fond/fond_interface.png");
+		fond = new Image("fond_interface/0.png");
 	}
 	
 	public void render (GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {

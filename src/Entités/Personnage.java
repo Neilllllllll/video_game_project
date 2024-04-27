@@ -12,18 +12,43 @@ import Mécanique.Vitesse;
 public class Personnage extends EntiteBougeable{
 	
 	// Coordonnée du saut
-	private float cord_h_saut;
+	protected float cord_h_saut;
 	
 	// Hauteur du saut;
-	private float hauteur_saut;
-	private int nb_saut;
+	protected float hauteur_saut;
+	protected int nb_saut;
 	
 	// Zone où le personnage considère les plateformes
-	private CarreHitbox zone;
+	protected CarreHitbox zone;
 	
 	// Généraliser le constructeur
-	public Personnage(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position, float hauteur_saut, CarreHitbox zone) throws SlickException {
-		super(vitesse, vitesselim, acceleration, path, carre, position);
+	public Personnage(
+			Vitesse vitesse, 
+			Vitesse vitesselim, 
+			Acceleration acceleration, 
+			String images_animation_g_path, 
+			String images_animation_d_path,
+			String images_animation_droite,
+			String images_animation_gauche,
+			String images_animation_jump_d,
+			String images_animation_jump_g,
+			CarreHitbox carre, 
+			Position position, 
+			float hauteur_saut, 
+			CarreHitbox zone
+			) throws SlickException {
+		super(
+				vitesse, 
+				vitesselim, 
+				acceleration, 
+				images_animation_g_path, 
+				images_animation_d_path,
+				images_animation_droite,
+				images_animation_gauche,
+				images_animation_jump_d,
+				images_animation_jump_g,
+				carre, 
+				position);
 		// Masse  
 		masse = 50;
 		
@@ -33,7 +58,7 @@ public class Personnage extends EntiteBougeable{
 		// Initialisation des forces du personnage - faut le mettre en paramètre car cela va varier en fonction du personnage
 		force_saut = new Force(1000000, false, false);
 		force_poids = new Force(100000, true, false);
-		this.force_droite = new Force(10000, true, true);;
+		this.force_droite = new Force(10000, true, true);
 		this.force_gauche = new Force(10000, false, true);
 		
 		// Force mise par défaut
@@ -41,54 +66,6 @@ public class Personnage extends EntiteBougeable{
 		
 		// Hauteur du saut que peut faire le personnage
 		this.hauteur_saut = hauteur_saut;
-		
-		// Images lorsqu'il est statique vers la droite
-		images_animation_d = new Image[19];
-		String path_s_d;
-		for(int i = 0; i < images_animation_d.length; i++) {
-			path_s_d = "wizar_d/wizar_droite" + i + ".png";
-			images_animation_d[i] = new Image(path_s_d);
-		}
-		
-		// Images lorsqu'il est statique vers la gauche
-		images_animation_g = new Image[19];
-		String path_s_g;
-		for(int i = 0; i < images_animation_g.length; i++) {
-			path_s_g = "wizar_g/wizar_gauche" + i + ".png";
-			images_animation_g[i] = new Image(path_s_g);
-		}
-		
-		// Images lorsqu'il va à droite
-		images_animation_droite = new Image[19];
-		String path_d;
-		for(int i = 0; i < images_animation_droite.length; i++) {
-			path_d = "wizar_droite/wizar_walk_droite" + i + ".png";
-			images_animation_droite[i] = new Image(path_d);
-		}
-		
-		// Images lorsqu'il va à gauche
-		images_animation_gauche = new Image[19];
-		String path_g;
-		for(int i = 0; i < images_animation_gauche.length; i++) {
-			path_g = "wizar_gauche/wizar_walk_gauche" + i + ".png";
-			images_animation_gauche[i] = new Image(path_g);
-		}
-		
-		// Images lorsqu'il jump
-		images_animation_jump_d = new Image[8];
-		String path_j_d;
-		for(int i = 0; i < images_animation_jump_d.length; i++) {
-			path_j_d = "wizar_jump_d/wizar_jump_droite" + i + ".png";
-			images_animation_jump_d[i] = new Image(path_j_d);
-		}
-		
-		// Images lorsqu'il jump
-		images_animation_jump_g = new Image[8];
-		String path_j_g;
-		for(int i = 0; i < images_animation_jump_g.length; i++) {
-			path_j_g = "wizar_jump_g/wizar_jump_gauche" + i + ".png";
-			images_animation_jump_g[i] = new Image(path_j_g);
-		}
 	}
 	
 	public void saut() {
@@ -151,34 +128,6 @@ public class Personnage extends EntiteBougeable{
 			cancel_force_x(force_gauche);
 			force_gauche.setNorme(force_gauche.getNorme() * -1);
 			gauche = false;
-		}
-	}
-	
-	public void check_input(Input input) {
-		if(input.isKeyDown(Input.KEY_RIGHT)){
-			droite();
-			direction_droite = true;
-		}
-		else if (isDroite() && input.isKeyDown(Input.KEY_RIGHT) == false){
-			ralentis_droite();
-		}
-		
-		if(input.isKeyDown(Input.KEY_LEFT)){
-			gauche();
-			direction_droite = false;
-		}
-		else if(isGauche() && input.isKeyDown(Input.KEY_LEFT) == false){
-			ralentis_gauche();
-		}
-		
-		if(isDroite() == false && isGauche() == false) {
-			vitesse.setVx(0);
-		}
-		if(input.isKeyPressed(Input.KEY_SPACE)){
-			saut();
-		}
-		if(isSaute()) {
-			check_hauteur();
 		}
 	}
 	

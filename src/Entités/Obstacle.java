@@ -1,18 +1,18 @@
 package Entités;
+
 import org.newdawn.slick.SlickException;
 
 import Hitbox.CarreHitbox;
-import Mécanique.Acceleration;
 import Mécanique.Position;
-import Mécanique.Vitesse;
 
-public class Obstacle extends EntiteBougeable{
+
+public class Obstacle extends EntiteAffichable{
 	
 	// Position du personnage par rapport à la plateforme
 	private int position_personnage;
 	
-	public Obstacle(Vitesse vitesse, Vitesse vitesselim, Acceleration acceleration, String path, CarreHitbox carre, Position position) throws SlickException {
-		super(vitesse, vitesselim, acceleration, path, carre, position);
+	public Obstacle(String path, CarreHitbox carre, Position position) throws SlickException {
+		super(path, carre, position);
 	}
 	
 	public int getPosition_personnage() {
@@ -48,7 +48,6 @@ public class Obstacle extends EntiteBougeable{
 			personnage.setNb_saut(2);
 			personnage.vitesse.setVy(0);
 			personnage.setEst_sol(true);
-			System.out.println(personnage.isEst_sol());
 		}
 		else if (position_personnage == 1 && personnage.position.getX() < position.getX() + carre.getWidth()){
 			personnage.position.setX(position.getX() + carre.getWidth());
