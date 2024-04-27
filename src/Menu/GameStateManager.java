@@ -4,7 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import Niveaux.Niveau1;
+import Niveaux.Niveau5;
 
 public class GameStateManager extends StateBasedGame{
 	
@@ -26,7 +26,7 @@ public class GameStateManager extends StateBasedGame{
 
 	public void initStatesList(GameContainer arg0) throws SlickException {
 		addState(new Interface());
-		addState(new Niveau1());
+		addState(new Niveau5());
 	}
 	
 }

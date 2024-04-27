@@ -17,7 +17,7 @@ import Mécanique.Acceleration;
 import Mécanique.Position;
 import Mécanique.Vitesse;
 
-public class Niveau1 extends BasicGameState {
+public class Niveau5 extends BasicGameState {
 	
 	Input input;
 	
@@ -86,7 +86,7 @@ public class Niveau1 extends BasicGameState {
 		obstacles[1] = obstacle1;
 		obstacles[2] = obstacle2;
 		
-		position_xp = new Position(200, 500);
+		position_xp = new Position(100, 500);
 		carre_xp = new CarreHitbox(position_xp, 100, 100);
 		xp = new Xp("image_xp", carre_xp, position_xp);
 		

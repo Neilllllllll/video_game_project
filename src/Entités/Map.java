@@ -36,12 +36,10 @@ public class Map extends EntiteAffichable{
 				joueur.update_mouvement(delta);
 				joueur.getZone().update_position((-1* joueur.getZone().getWidth() / 2) + joueur.carre.getWidth()/2,( -1* joueur.getZone().getWidth() / 2) + joueur.carre.getHeigth()/2, joueur);
 				if(joueur.considere_xp(xp)) {
+					xp.calcul_intiale(joueur);
 					xp.setStatique(false);
 				}
 				xp.update_xp(joueur);
-				
-				
-				
 				if(!xp.isStatique()) {
 					xp.go_joueur(joueur);
 				}

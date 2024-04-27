@@ -32,14 +32,13 @@ public class Xp extends EntiteAffichable{
 		if(statique == true) {
 			stationnaire();
 		}
-		else {
-			System.out.println("oui");
-			statique = false;
-			dx = joueur.position.getX() - position.getX();
-			dy = joueur.position.getY() - position.getY();
-			h = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-			teta = (float) Math.acos(Math.sqrt(Math.pow(dx, 2)) / h);
-		}
+	}
+	
+	public void calcul_intiale(Joueur joueur) {
+		dx = joueur.position.getX() - position.getX();
+		dy = joueur.position.getY() - position.getY();
+		h = (float) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+		teta = (float) Math.acos(Math.sqrt(Math.pow(dx, 2)) / h);
 	}
 	
 	public void go_joueur(Joueur joueur) throws SlickException {
