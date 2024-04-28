@@ -32,7 +32,7 @@ public class Interface extends BasicGameState {
 		if( (input.getMouseX() >= x && input.getMouseX() <= (x+l)) && (input.getMouseY() >= y && input.getMouseY() <= (y+L)) ) {
 			// Affichage du bouton cliquer pour jouer
 			if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {	
-				game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+				game.enterState(5, new FadeOutTransition(), new FadeInTransition());
 			}
 		}
 	}

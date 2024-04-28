@@ -16,6 +16,15 @@ public class CarreHitbox{
 		this.heigth = heigth;
 	}
 	
+	// Constructeur pour zone autour de l'xp
+	public CarreHitbox(CarreHitbox carre) {
+		width = carre.getWidth()*2;
+		heigth = carre.getHeigth()*2;
+		position = new Position(carre.position.getX(), carre.position.getY());
+		position.setX(position.getX() + (carre.getWidth()/2) - width/2);
+		position.setY(position.getY() + (carre.getHeigth()/2) - heigth/2);
+	}
+	
 	public void afficher(Graphics g) {
 		g.drawRect(position.getX(), position.getY(), width, heigth);
 	}
@@ -49,4 +58,18 @@ public class CarreHitbox{
 	public Position getPosition() {
 		return position;
 	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+	public void setHeigth(float heigth) {
+		this.heigth = heigth;
+	}
+	
+	
 }

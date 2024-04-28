@@ -9,6 +9,8 @@ import Mécanique.Position;
 import Mécanique.Vitesse;
 
 public class Joueur extends Personnage{
+	
+	private int compteur_xp;
 
 	public Joueur(
 			Vitesse vitesse, 
@@ -39,6 +41,7 @@ public class Joueur extends Personnage{
 			position, 
 			hauteur_saut, 
 			zone);
+		compteur_xp = 0;
 	}
 	
 	public void check_input(Input input) {
@@ -69,11 +72,37 @@ public class Joueur extends Personnage{
 		}
 	}
 	
+	/*
+	public void attaquer() {
+		
+	}*/
+	
+/*	
+	public void EVOLUTIONNNNNNNNNNNNNNNNNNNNNNN(Joueur joueur) {
+		if(compteur_xp >= 10) {
+			this.vitesse = 
+			this.vitesselim = 
+			this.acceleration = 
+			this.images_animation_g_path = 
+			this.images_animation_d_path =
+			this.images_animation_droite =
+			this.images_animation_gauche =
+			this.images_animation_jump_d =
+			this.images_animation_jump_g =
+			this.carre = 
+			this.position = 
+			this.hauteur_saut =
+			this.zone = 
+		}
+	}*/
+	
 	public boolean considere_xp(Xp xp) {
 		if(CarreHitbox.sechevauche(zone, xp.carre)) {
 			return true;
 		}
 		return false;
 	}
+	
+	
 
 }

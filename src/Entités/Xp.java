@@ -1,5 +1,4 @@
 package Entités;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import Hitbox.CarreHitbox;
 import Mécanique.Position;
@@ -9,10 +8,14 @@ import java.util.Random;
 public class Xp extends EntiteAffichable{
 	// Etat 
 	private boolean statique;
+	private boolean absorbe;
 	private float h;
 	private float teta;
 	private CarreHitbox zone; 
 	private String path_explosion;
+    private float vx;
+    private float vy;
+    private int g = 0;
 	
 	public Xp(
 			String images_animation_g_path, 
@@ -26,9 +29,13 @@ public class Xp extends EntiteAffichable{
 				carre, 
 				position
 		);
+		Random rand = new Random();
+		vx = 4 + rand.nextFloat() * (10 - 4);
+		vy = 4 + rand.nextFloat() * (10 - 4);
 		this.zone = zone;
 		statique = true;
 		path_explosion = "explosion_niveau_5";
+		absorbe = false;
 	}
 	
 	public void update_xp(Joueur joueur, int delta) throws SlickException {
@@ -54,7 +61,7 @@ public class Xp extends EntiteAffichable{
 
 	
 	public void go_joueur(Joueur joueur) throws SlickException {
-	    float offset = 5;
+	    float offset = 30;
 	    
 	    float centre_xp_x = position.getX() + carre.getWidth() / 2;
 	    float centre_xp_y = position.getY() + carre.getHeigth() / 2;
@@ -65,7 +72,8 @@ public class Xp extends EntiteAffichable{
 	    // Vérification si l'objet est assez proche du joueur pour considérer qu'il l'a "atteint"
 	    if (Math.abs(centre_xp_x - centre_joueur_x) <= offset && Math.abs(centre_xp_y - centre_joueur_y) <= offset) {
 	        atteint_joueur(joueur);
-	    } else {
+	    } 
+	    else {
 	        // Mise à jour de l'angle et de la distance pour le mouvement en spirale
 	        teta -= 0.1; // Décrémente l'angle pour la rotation
 	        h -= 2; // Réduit la distance pour créer l'effet spirale
@@ -76,29 +84,59 @@ public class Xp extends EntiteAffichable{
 	    }
 	}
 
-	
-
 	public void stationnaire(int delta) {
-        if (statique) {
-            Random rand = new Random();
-            float vx = rand.nextFloat();
-            float vy = rand.nextFloat();
-            position.setX(position.getX() + (10 * delta/100));
-            position.setY(position.getY() + (10 * delta/100));
-            if (position.getX() < zone.getPosition().getX() || position.getX() + carre.getWidth() > zone.getPosition().getX() + zone.getWidth()) {
-                vx *= -1;
-            }
-            if (position.getY() < zone.getPosition().getY() || position.getY() + carre.getHeigth() > zone.getPosition().getY() + zone.getHeigth()) {
-                vy *= -1;
-            }
+        position.setX(position.getX() + (vx * delta/100));
+        position.setY(position.getY() + (vy * delta/100));
+        if (position.getX() < zone.getPosition().getX() || position.getX() + carre.getWidth() > zone.getPosition().getX() + zone.getWidth()) {
+            vx *= -1;
+        }
+        if (position.getY() < zone.getPosition().getY() || position.getY() + carre.getHeigth() > zone.getPosition().getY() + zone.getHeigth()) {
+            vy *= -1;
         }
     }
 
-
-
-	
 	public void atteint_joueur(Joueur joueur) throws SlickException {
-		images_animation_g = Animation.fill_Animation(path_explosion);
+		if(g == 0) {
+			images_animation_g = Animation.fill_Animation(path_explosion);
+			z = 0;
+			g += 1;
+		}
+		super.afficher_entite_affichable(false);
+		if(z >= images_animation_g.length)
+			absorbe = true;
+	}
+	
+
+	public boolean isAbsorbe() {
+		return absorbe;
+	}
+
+	public void setAbsorbe(boolean absorbe) {
+		this.absorbe = absorbe;
+	}
+
+	public CarreHitbox getZone() {
+		return zone;
+	}
+
+	public void setZone(CarreHitbox zone) {
+		this.zone = zone;
+	}
+
+	public float getVx() {
+		return vx;
+	}
+
+	public void setVx(float vx) {
+		this.vx = vx;
+	}
+
+	public float getVy() {
+		return vy;
+	}
+
+	public void setVy(float vy) {
+		this.vy = vy;
 	}
 
 	public boolean isStatique() {

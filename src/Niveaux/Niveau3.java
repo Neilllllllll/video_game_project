@@ -6,7 +6,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import Entités.Joueur;
+
 public class Niveau3 extends BasicGameState{
+	
+	private Joueur joueur;
 
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		
